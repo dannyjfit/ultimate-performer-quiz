@@ -43,7 +43,6 @@
     padding: 40px 24px 80px;
   }
 
-  /* HEADER */
   .quiz-header {
     text-align: center;
     margin-bottom: 48px;
@@ -74,7 +73,6 @@
     margin: 0 auto;
   }
 
-  /* PROGRESS */
   .progress-wrap {
     margin-bottom: 40px;
   }
@@ -104,7 +102,6 @@
     transition: width 0.4s ease;
   }
 
-  /* PILLAR LABEL */
   .pillar-label {
     display: inline-block;
     font-size: 10px;
@@ -118,7 +115,6 @@
     margin-bottom: 20px;
   }
 
-  /* QUESTION CARD */
   .question-card {
     background: var(--white);
     border: 1px solid var(--border);
@@ -144,7 +140,6 @@
     margin-bottom: 28px;
   }
 
-  /* LIKERT OPTIONS */
   .options-list {
     list-style: none;
     display: flex;
@@ -180,7 +175,6 @@
     color: var(--white);
   }
 
-  /* NUMERIC SCALE */
   .scale-wrap {
     display: flex;
     gap: 8px;
@@ -226,7 +220,6 @@
     color: var(--white);
   }
 
-  /* MULTI-SELECT */
   .multi-hint {
     font-size: 12px;
     color: var(--light);
@@ -234,7 +227,6 @@
     margin-bottom: 16px;
   }
 
-  /* NAV */
   .nav-row {
     display: flex;
     justify-content: space-between;
@@ -285,7 +277,6 @@
 
   .btn-submit:hover { background: #333; }
 
-  /* RESULTS */
   .results-wrap {
     display: none;
     animation: fadeUp 0.4s ease;
@@ -324,7 +315,6 @@
     color: var(--dark);
   }
 
-  /* PILLAR RESULTS */
   .pillar-result {
     background: var(--white);
     border: 1px solid var(--border);
@@ -388,7 +378,6 @@
     color: var(--mid);
   }
 
-  /* PRIORITY CALLOUT */
   .priority-box {
     border: 2px solid var(--dark);
     border-radius: 4px;
@@ -420,7 +409,6 @@
     color: rgba(255,255,255,0.75);
   }
 
-  /* CTA */
   .results-cta {
     text-align: center;
     padding: 36px 28px;
@@ -434,28 +422,23 @@
     font-size: 15px;
     color: var(--mid);
     line-height: 1.6;
-    margin-bottom: 24px;
+    margin-bottom: 16px;
     max-width: 420px;
     margin-left: auto;
     margin-right: auto;
   }
 
-  .btn-cta {
-    display: inline-block;
-    background: var(--steel);
-    color: var(--white);
-    font-family: 'Montserrat', sans-serif;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 16px 40px;
+  .next-step-instruction {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--dark);
+    background: rgba(70, 130, 180, 0.08);
+    border: 1.5px solid rgba(70, 130, 180, 0.25);
     border-radius: 3px;
-    text-decoration: none;
-    transition: background 0.15s ease;
+    padding: 14px 20px;
+    display: inline-block;
+    margin-bottom: 16px;
   }
-
-  .btn-cta:hover { background: var(--steel-dark); }
 
   .restart-link {
     display: block;
@@ -531,7 +514,7 @@
       </div>
     </div>
 
-    <!-- Q3 SCALE -->
+    <!-- Q3 -->
     <div class="question-card" id="q3">
       <div class="pillar-label">Movement</div>
       <p class="question-text">How often are you currently doing any form of structured exercise?</p>
@@ -548,7 +531,7 @@
       </div>
     </div>
 
-    <!-- Q4 LIKERT -->
+    <!-- Q4 -->
     <div class="question-card" id="q4">
       <div class="pillar-label">Movement</div>
       <p class="question-text">How confident are you that what you're currently doing (or planning to do) is actually going to work?</p>
@@ -583,7 +566,7 @@
       </div>
     </div>
 
-    <!-- Q6 LIKERT -->
+    <!-- Q6 -->
     <div class="question-card" id="q6">
       <div class="pillar-label">Nutrition</div>
       <p class="question-text">How often does a busy schedule completely derail your nutrition?</p>
@@ -618,7 +601,7 @@
       </div>
     </div>
 
-    <!-- Q8 LIKERT -->
+    <!-- Q8 -->
     <div class="question-card" id="q8">
       <div class="pillar-label">Recovery</div>
       <p class="question-text">How intentional are you about managing stress and actually switching off?</p>
@@ -650,7 +633,7 @@
 
     <div class="results-cta">
       <p>You've got your starting point. Now work through the programme in order — the Why Workshop is where everything begins.</p>
-      <a href="https://www.notion.so/350bbaf6c68e81558a7dde36eba83df1" target="_blank" class="btn-cta">Start the Why Workshop</a>
+      <div class="next-step-instruction">✅ Results saved — scroll up and head to the Why Workshop next.</div>
       <span class="restart-link" onclick="restartQuiz()">Retake the quiz</span>
     </div>
   </div>
@@ -662,7 +645,6 @@
   let currentQ = 1;
   const TOTAL = 8;
 
-  // Feedback data
   const pillars = [
     {
       name: 'Mindset & Identity',
@@ -702,12 +684,10 @@
     }
   ];
 
-  // Option buttons
   document.querySelectorAll('.option-btn:not(.multi)').forEach(btn => {
     btn.addEventListener('click', function() {
       const q = this.dataset.q;
       const v = parseInt(this.dataset.v);
-      // deselect siblings
       document.querySelectorAll(`.option-btn[data-q="${q}"]`).forEach(b => b.classList.remove('selected'));
       this.classList.add('selected');
       answers[q] = v;
@@ -715,7 +695,6 @@
     });
   });
 
-  // Scale buttons
   document.querySelectorAll('.scale-btn').forEach(btn => {
     btn.addEventListener('click', function() {
       const q = this.dataset.q;
@@ -727,12 +706,10 @@
     });
   });
 
-  // Multi-select (Q2) — score = number selected (1–5), inverted (more blockers = lower score)
   document.querySelectorAll('.option-btn.multi').forEach(btn => {
     btn.addEventListener('click', function() {
       this.classList.toggle('selected');
       const selected = document.querySelectorAll('.option-btn.multi.selected').length;
-      // More blockers = lower score (5 selected = score 1, 1 selected = score 5)
       const score = Math.max(1, 6 - selected);
       answers['2'] = score;
       document.getElementById('next2').disabled = selected === 0;
@@ -790,7 +767,6 @@
     resultsEl.classList.add('active');
     window.scrollTo(0,0);
 
-    // Calculate scores
     let totalScore = 0;
     let lowestPillar = null;
     let lowestScore = 99;
@@ -804,7 +780,6 @@
 
     document.getElementById('totalScore').textContent = `${totalScore} / 40`;
 
-    // Title based on total
     const titles = {
       low: "There's a lot of ground to cover — but that's actually good news.",
       mid: "You've got solid foundations in some areas. A few key gaps to close.",
@@ -813,7 +788,6 @@
     const titleKey = totalScore <= 16 ? 'low' : totalScore <= 28 ? 'mid' : 'high';
     document.getElementById('resultsTitle').textContent = titles[titleKey];
 
-    // Render pillar results
     const container = document.getElementById('pillarResults');
     container.innerHTML = '';
     scores.forEach(({ pillar, score }) => {
@@ -836,7 +810,6 @@
       `;
     });
 
-    // Priority box
     document.getElementById('priorityBox').innerHTML = `
       <div class="priority-box">
         <div class="priority-box-label">Where to Focus First</div>
@@ -860,7 +833,6 @@
 
   updateProgress(1);
 
-  // Notion iframe height reporting
   function reportHeight() {
     const h = document.documentElement.scrollHeight;
     window.parent.postMessage({ type: 'setHeight', height: h }, '*');
